@@ -1,16 +1,22 @@
 A = 20;
-B = 15;
-C = 35;
+B = 15 - 1.25;
+C = 35 - 1.25;
 D = 10;
 E = 10;
 F = 30;
-G = 12;
-H = 28;
+G = 13.25;
+H = 25;
+I = 6.5; // height of mounting wings
 J = 55;
-K = 10;
+K = 11.5;
 L = 4.2;
 M = 40;
-X = 4;
+Q = 43 -  G - H;
+X = 3;
+
+echo("H + K = ", H + K);
+echo("H + G = ", H + G);
+echo("Q = ", Q);
 
 M3_nut_radius = 5.5 / cos(180 / 6) / 2;
 
