@@ -43,10 +43,10 @@ module servo_negative() {
 	translate([-B, D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
 	translate([C, -D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
 	translate([C, D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
-	translate([-B, -D / 2, -10]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
-	translate([-B, D / 2, -10]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
-	translate([C, -D / 2, -10]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
-	translate([C, D / 2, -10]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
+	translate([-B, -D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 45, $fn=6);
+	translate([-B, D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 45, $fn=6);
+	translate([C, -D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H +45, $fn=6);
+	translate([C, D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 45, $fn=6);
 	translate([-B, -D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
 	translate([-B, D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
 	translate([C, -D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
