@@ -53,6 +53,8 @@ module servo_negative() {
 	translate([C, D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
 
 	translate([0, 0, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
+
+	translate([F, 0, 0])rotate([0, 20, 0]) translate([-10, -4.5, 0]) cube([100, 9, 3.5]);
 }
 
 //servo();
