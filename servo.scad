@@ -18,7 +18,7 @@ echo("H + K = ", H + K);
 echo("H + G = ", H + G);
 echo("Q = ", Q);
 
-M3_nut_radius = 5.5 / cos(180 / 6) / 2;
+M3_nut_radius = 5.6 / cos(180 / 6) / 2;
 M3_washer_radius = 7.5 / 2 / cos(180 / 12);
 
 servo_diag1 = sqrt(pow((J  - M) / 2 + E, 2) + pow(A / 2, 2));
