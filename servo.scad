@@ -11,7 +11,7 @@ J = 55;
 K = 11.5;
 L = 4.2;
 M = 40;
-Q = 43 -  G - H;
+Q = 44 -  G - H;
 X = 3;
 
 echo("H + K = ", H + K);
@@ -64,14 +64,14 @@ module servo_negative() {
 	
 		translate([0, 0, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
 	
-		translate([-E, 0, 0])rotate([0, 20, 180]) translate([-10, -4.5, 0]) cube([100, 9, 3.5]);
+		translate([-E, 0, 1])rotate([0, 20, 180]) translate([-10, -4.5, 0]) cube([100, 9, 4]);
 	}
 }
 
 module horn_pin() {
 	render() {
-		cylinder(r=1.5 / 2, h=Q * 2, $fn=8);
-		translate([0, 0, Q + 3]) cylinder(r=1.2, h=Q * 2, $fn=8);
+		cylinder(r=1.5 / 2, h=Q * 5, $fn=8);
+		//translate([0, 0, Q + 3]) cylinder(r=1.2, h=Q * 2, $fn=8);
 	}
 }
 

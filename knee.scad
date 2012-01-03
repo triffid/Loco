@@ -1,7 +1,7 @@
 include <servo.scad>
 
 // set to 0 for display
-print = 1;
+print = 0;
 
 min_bend_angle_1 = 135;
 min_bend_angle_2 = 0;
@@ -77,7 +77,7 @@ module thigh() {
 		translate([0, -A / 2, H + 10]) cube([J + 1, A, H +G]);
 		translate([-F - (J - M) / 2, -A / 2 - 10, H + 10]) cube([J + 1, A, G + 0.02]);
 		translate([-F, -A / 2 - 10, 10]) cube([M, A, H+ 0.02]);
-		translate([E, 0, 10]) rotate([0, 20, 0]) translate([-10, -4.5 - 21, 0]) cube([100, 30, 3.5]);
+		translate([E, 0, 11]) rotate([0, 20, 0]) translate([-10, -4.5 - 21, 0]) cube([100, 30, 4]);
 		translate([0, 0, 5]) bearing624_negative();
 		translate([-E, 15, 10 + ((H + K) / 2)]) scale([1.25, 1, 1]) rotate([90, 0, 0]) cylinder(r = F / 2, h = 30);
 	}
