@@ -48,8 +48,8 @@ module arm2(r = 13, h = 10, l = 100) {
 module shin() {
 	difference() {
 		translate([-13, -12.5, 0]) cube([J, 25, 60]);
-		translate([0, 0, 5]) cylinder(r=servo_diag1 + 2, h=H + G + X + 5);
-		translate([0, 0, -1]) cylinder(r = 3.8 / 2, h = 62);
+		translate([0, 0, 5]) cylinder(r=servo_diag1 + 3, h=H + G + X + 5);
+		translate([0, 0, -1]) cylinder(r = 3.9 / 2, h = 62);
 		difference() {
 			translate([-25, -15, -1]) cube([25, 30, 100]);
 			translate([0, 0, -2]) {
