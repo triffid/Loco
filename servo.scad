@@ -6,11 +6,12 @@ E = 10;
 F = 30;
 G = 13.25;
 H = 25;
-I = 6.5; // height of mounting wings
+I = 7; // height of mounting wings
 J = 55;
 K = 11.5;
 L = 4.2;
 M = 40;
+P = (J - M) / 2;
 Q = 44 -  G - H;
 X = 3;
 
@@ -26,11 +27,38 @@ servo_diag2 = sqrt(pow((J  - M) / 2 + F, 2) + pow(A / 2, 2));
 
 negative_clearance = 0.25;
 
+module arm(r = 13, w = 5, l = 40) {
+	render()
+	rotate([0, -90, 0]) {
+		cylinder(r = r, h = w, $fn=64);
+		translate([-l, -r, 0]) cube([l, r * 2, w]);
+	}
+}
+
+module bearing624() {
+	difference() {
+		cylinder(r=13 / 2, h = 5);
+		translate([0, 0, -1]) cylinder(r = 4 / 2, h = 7);
+		difference() {
+			translate([0, 0, 4.5]) cylinder(r1 = 10 / 2, r2 = 12 / 2, h = 1);
+			translate([0, 0, 4.25]) cylinder(r1 = 8 / 2, r2 = 6 / 2, h = 1);
+		}
+		difference() {
+			translate([0, 0, -0.5]) cylinder(r1 = 12 / 2, r2 = 10 / 2, h = 1);
+			translate([0, 0, -0.25]) cylinder(r1 = 6 / 2, r2 = 8 / 2, h = 1);
+		}
+	}
+}
+
+module bearing624_negative() {
+	cylinder(r=13 / 2 + 0.25, h = 5);
+}
+
 module servo() {
 	render() {
 		translate([-E, -A / 2, 0]) cube([M, A, H + K]);
 		difference() {
-			translate([-E - (J - M) / 2, A / -2, H]) cube([J, A, I]);
+			translate([-E - P, A / -2, H]) cube([J, A, I]);
 			translate([-B, -D / 2, H - 1]) cylinder(r=L / 2, h = I +2, $fn=8);
 			translate([-B, D / 2, H - 1]) cylinder(r=L / 2, h = I + 2, $fn=8);
 			translate([C, -D / 2, H - 1]) cylinder(r=L / 2, h = I + 2, $fn=8);
@@ -41,31 +69,51 @@ module servo() {
 	}
 }
 
-module servo_negative() {
-	render() {
+module servo_negative(mount_orientation = 0) {
+	//render()
+	{
 		servo();
 		translate([-E - negative_clearance, -A / 2 - negative_clearance, -negative_clearance]) cube([M + negative_clearance * 2, A + negative_clearance * 2, H + G + negative_clearance * 2]);
 		translate([0, 0, H]) cylinder(r = A / 2.5 + negative_clearance, h=G + negative_clearance);
 	
-		translate([-E - (J - M) / 2, A / -2, H]) cube([J, A, K]);
+		translate([-E - P, A / -2, H]) cube([J, A, I]);
+		if (mount_orientation == 0) {
+			translate([-B, -D / 2, H - 10]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+			translate([-B, D / 2, H - 10]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+			translate([C, -D / 2, H - 10]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+			translate([C, D / 2, H - 10]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
 	
-		translate([-B, -D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
-		translate([-B, D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
-		translate([C, -D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
-		translate([C, D / 2, H - 10]) cylinder(r=L / 2, h = 12, $fn=8);
-		translate([-B, -D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 45, $fn=6);
-		translate([-B, D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 45, $fn=6);
-		translate([C, -D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H +45, $fn=6);
-		translate([C, D / 2, -50]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 45, $fn=6);
-		translate([-B, -D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
-		translate([-B, D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
-		translate([C, -D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
-		translate([C, D / 2, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
+			translate([-B, -D / 2, H]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
+			translate([-B, D / 2, H]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
+			translate([C, -D / 2, H]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
+			translate([C, D / 2, H]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 5, $fn=12);
+		}
+		else {
+			translate([-B, -D / 2, H]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+			translate([-B, D / 2, H]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+			translate([C, -D / 2, H]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+			translate([C, D / 2, H]) rotate([0, 0, 180 / 8]) cylinder(r=2.95 / 2, h = 21, $fn=8);
+
+			translate([-B, -D / 2, -10]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 15, $fn=12);
+			translate([-B, D / 2, -10]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 15, $fn=12);
+			translate([C, -D / 2, -10]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 15, $fn=12);
+			translate([C, D / 2, -10]) rotate([0, 0, 180 / 12]) cylinder(r=M3_washer_radius, h = H + 15, $fn=12);
+		}
 	
-		translate([0, 0, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=6);
+		translate([0, 0, H]) rotate([0, 0, 180 / 6]) cylinder(r=M3_nut_radius, h = H + 5, $fn=16);
 	
 		translate([-E, 0, 1])rotate([0, 20, 180]) translate([-10, -4.5, 0]) cube([100, 9, 4]);
 	}
+}
+
+module servo_negative_side_entry() {
+	servo_negative();
+	// side entry: mounting tabs
+	translate([-E - P, A / -2, H]) cube([J, A * 2, I]);
+	// side entry: body
+	translate([-E - negative_clearance, -A / 2 - negative_clearance, -negative_clearance]) cube([M + negative_clearance * 2, A * 2 + negative_clearance * 2, H + G + negative_clearance * 2]);
+	// side entry: cable
+	translate([-E, negative_clearance, 1]) rotate([0, -20, 0]) translate([-90, 0, 0]) cube([100, A * 1.5, 4]);
 }
 
 module horn_pin() {
@@ -113,4 +161,7 @@ module servo_horn_negative() {
 
 //servo();
 //%servo_horn_negative();
-//%servo_negative();
+//%servo_negative(1);
+
+//servo_negative_side_entry();
+
