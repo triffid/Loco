@@ -1,6 +1,6 @@
 include <servo.scad>
 
-print = 0;
+print = 1;
 
 a1 = sin(360 * $t) * 15;
 a2 = sin(360 * $t + 90) * 65 - 30;
@@ -14,7 +14,7 @@ module peen(r = 20, h = 50) {
 }
 
 module foot() {
-	//render()
+	render()
 	difference() {
 		intersection() {
 			union() {
@@ -31,7 +31,7 @@ module foot() {
 		intersection() {
 			translate([0, -45, 21])
 			rotate([0, -90, -90])
-			{ servo_horn_negative(); #servo_horn(); }
+			{ servo_horn_negative(); servo_horn(); }
 	
 			translate([-25, -5, 0]) cube([50, 10, 50]);
 		}
@@ -47,7 +47,7 @@ module foot() {
 }
 
 module ankle() {
-	//render()
+	render()
 	difference() {
 		translate([-9 - 5 - 5, 31.98, -E - P + 0.02]) mirror([0, 1, 0]) cube([H + K + 6, 50, J - 0.05]);
 
@@ -104,7 +104,7 @@ module shin() {
 		rotate([0, -90, 0]) rotate([0, 0, 180 / 8]) cylinder(r=1.9, h=100, center=true, $fn=8);
 
 
-		render() difference() {
+		#render() difference() {
 			translate([20, -50, -20]) cube([100, 100, 150]);
 			translate([33 - 0.4 * 14, 0, 0]) scale([0.4, 1, 1]) mirror([0, 0, 1]) {
 				peen(14, 100);
@@ -137,7 +137,7 @@ if (print == 0)
 {
 	foot();
 	translate([0, 0, 21]) rotate([0, a1, 0]) ankle();
-	//translate([0, 12, 21]) rotate([0, a1, 0]) rotate([a2, 0, 0]) shin();
+	translate([0, 12, 21]) rotate([0, a1, 0]) rotate([a2, 0, 0]) shin();
 
 	/*%translate([0, -44, 21])
 	rotate([0, a1 * 1, 0])
@@ -161,18 +161,18 @@ if (print == 0)
 else {
 	//%translate([-50, -30, -1]) cube([150, 150, 1]);
 	foot();
-	translate([62, 0, 23.5]) {
+	translate([62, -10, 23.5]) {
 		render() difference() {
 			rotate([0, 0, 90]) rotate([0, 90, 0]) ankle();
-			translate([12, -18, 10]) cube([7, J + 1, 0.4]);
+			translate([13, -18, 10]) cube([7, J + 1, 0.4]);
 		}
 		translate([20, -20, -23.5]) cube([5, 60, 33.5 + 0.4]);
-		translate([17, -17.2, 10 + 0.4]) cube([8, J - 0.3, 0.4]);
-		translate([7.5, -17.2, 10]) cube([4.5, J - 0.3, 0.4]);
+		translate([17, -16.1, 10 + 0.4]) cube([8, J - 1.5, 0.4]);
+		translate([7.5, -16.1, 10]) cube([5.5, J - 1.5, 0.4]);
 	}
-	translate([50, 84, 13]) rotate([0, 0, -90]) rotate([90, 0, 0]) shin();/**/
+	translate([60, 93, 13]) rotate([0, 0, 0]) rotate([90, 0, 0]) shin();/**/
 }
 
 /**/
 
-cube([1, 1, 1]);
+translate([-40, -30, -1]) %cube([150, 150, 1]);
