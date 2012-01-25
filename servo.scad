@@ -51,7 +51,7 @@ module bearing624() {
 }
 
 module bearing624_negative() {
-	cylinder(r=13 / 2 + 0.25, h = 5);
+	translate([0, 0, -0.1]) cylinder(r=13 / 2 + 0.25, h = 5.2);
 }
 
 module servo() {
@@ -144,23 +144,25 @@ module servo_horn() {
 }
 
 module servo_horn_negative() {
-	render()
+	//render()
 	translate([0, 0, H + G]) {
 		cylinder(r = 24 / 2 + negative_clearance, h=Q);
 		cylinder(r = 7 / 2 + negative_clearance, h=30);
 		for (n=[0:2]) {
-			rotate([0, 0, -20 + n * 20]) translate([8.5, 0, 0]) horn_pin();
-			rotate([0, 0, -20 + n * 20]) translate([-8.5, 0, 0]) horn_pin();
-			rotate([0, 0, 90 -20 + n * 20]) translate([7, 0, 0]) horn_pin();
-			rotate([0, 0, 90 -20 + n * 20]) translate([-7, 0, 0]) horn_pin();
-			rotate([0, 0, 90 -20 + n * 20]) translate([10, 0, 0]) horn_pin();
-			rotate([0, 0, 90 -20 + n * 20]) translate([-10, 0, 0]) horn_pin();
+			if (n != 1) {
+				rotate([0, 0, -20 + n * 20]) translate([8.5, 0, 0]) horn_pin();
+				rotate([0, 0, -20 + n * 20]) translate([-8.5, 0, 0]) horn_pin();
+				//rotate([0, 0, 90 -20 + n * 20]) translate([7, 0, 0]) horn_pin();
+				//rotate([0, 0, 90 -20 + n * 20]) translate([-7, 0, 0]) horn_pin();
+				rotate([0, 0, 90 -20 + n * 20]) translate([10, 0, 0]) horn_pin();
+				rotate([0, 0, 90 -20 + n * 20]) translate([-10, 0, 0]) horn_pin();
+			}
 		}
 	}
 }
 
 //servo();
-//%servo_horn_negative();
+//servo_horn_negative();
 //%servo_negative(1);
 
 //servo_negative_side_entry();
