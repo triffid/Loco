@@ -63,12 +63,12 @@ module torso(lh1r = 0, lh2r = 0, ltr = 0, rh1r = 0, rh2r = 0, rtr = 0) {
 	}
 	translate([40, -10, 40]) rotate([0, 0, lh1r]) {
 		hip1();
-		/*translate([0, 57, -80]) rotate([0, lh2r, 0]) {
+		translate([0, 57, -80]) rotate([0, lh2r, 0]) {
 			hip2();
 			translate([-18, -57, 0]) {
 				rotate([ltr, 0, 0])
 				rotate([0, 90, 0]) {
-					//thigh();
+					thigh();
 				}
 			}
 		}/**/
@@ -81,7 +81,7 @@ module torso(lh1r = 0, lh2r = 0, ltr = 0, rh1r = 0, rh2r = 0, rtr = 0) {
 			translate([-18, -57, 0]) {
 				rotate([rtr, 0, 0])
 				rotate([0, 90, 0]) {
-					//thigh();
+					thigh();
 				}
 			}
 		}
